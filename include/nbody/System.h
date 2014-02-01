@@ -6,22 +6,25 @@
 
 #include <iosfwd>
 #include <string>
+#include <vector>
 
 namespace nbody {
 
   class System {
     size_t _nBodies;
-    Body *_body;
+    std::vector<Body> _body;
     float _softFactor = 1e-9f;
     float _dampingFactor = 1.0f;
+    float _defaultMass = 1.989e+30f;
     System() = delete;
     System( const System &sys ) = delete;
     System& operator=( const System &sys ) = delete;
   public:
-    System( size_t N ) : _nBodies{N}, _body{ new Body[N] } { initRandomState(); }
-    System( std::istream &input ) : _nBodies{}, _body{nullptr} { readState( input ); }
-    System( std::string filename ) : _nBodies{}, _body{nullptr} { readState( filename ); }
-    ~System() { delete [] _body; }
+    System( size_t N ) : _nBodies{N}, _body{} { initRandomState(); }
+    System( std::istream &input ) : _nBodies{}, _body{} { readState( input ); }
+    System( std::string filename ) : _nBodies{}, _body{} { readState( filename ); }
+    ~System() { }
+    void addBody( float init_x, float init_y );
     void interactBodies( size_t i, size_t j, float softFactor, Vector3f &acc ) const;
     void computeGravitation();
     void integrateSystem( float dt );
@@ -33,8 +36,8 @@ namespace nbody {
     void update( float dt );
     void setSoftening( float soft ) { _softFactor = soft; }
     void setDamping( float damp ) { _dampingFactor = damp; }
-    Body* bodies() const { return _body; }
-
+    float getSize() { return _body.size(); }
+    const std::vector<Body> getBodies( ) { std::vector<Body> ans = _body; return ans; } 
   };
 
 } // namespace nbody

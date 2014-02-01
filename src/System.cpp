@@ -10,6 +10,11 @@
 
 namespace nbody {
 
+  void System::addBody( float init_x, float init_y ) {
+	  ++_nBodies;
+	  _body.push_back( Body( init_x, init_y, _defaultMass ) );
+  }
+
   inline void System::interactBodies( size_t i, size_t j, float softFactor, Vector3f &acc ) const {
     Vector3f r = _body[j].position() - _body[i].position();
     float distance = r.norm() + softFactor;
@@ -56,8 +61,8 @@ namespace nbody {
     if( _nBodies > MAX_BODIES_RECOMMENDED ) {
       throw std::runtime_error( "Too many input bodies" );
     }
-    _body = new Body[_nBodies];
     for( size_t i = 0; i < _nBodies; ++i ) {
+      _body.push_back( Body( ) );
       input >> _body[i];
     }
   }

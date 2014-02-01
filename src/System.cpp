@@ -6,10 +6,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
-<<<<<<< HEAD
 #include <cstdlib>
-=======
->>>>>>> origin/master
 
 namespace nbody {
 
@@ -80,7 +77,7 @@ namespace nbody {
       float randX = rand() * max_random;
       float randY = rand() * max_random;
       float randZ = rand() * max_random;
-      float randMass = rand() * max_random;
+      // float randMass = rand() * max_random;
 
       Vector3f randPos = Vector3f{ randX, randY, randZ };
       

@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
 
 namespace nbody {
 
@@ -65,6 +66,22 @@ namespace nbody {
     output << _nBodies << "\n";
     for( size_t i = 0; i < _nBodies; ++i ) {
       output << _body[i] << "\n";
+    }
+  }
+
+  //Give the n bodies random positions
+  void System::initRandomState() {
+    float max_random = 1000.0f;
+
+    for ( size_t i = 0; i < _nBodies; i++ ) {
+      float randX = rand() * max_random;
+      float randY = rand() * max_random;
+      float randZ = rand() * max_random;
+      float randMass = rand() * max_random;
+
+      Vector3f randPos = Vector3f{ randX, randY, randZ };
+      
+       _body[i].position() = randPos;
     }
   }
 

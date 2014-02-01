@@ -6,10 +6,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
-<<<<<<< HEAD
 #include <cstdlib>
-=======
->>>>>>> origin/master
 
 namespace nbody {
 

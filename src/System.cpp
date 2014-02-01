@@ -72,7 +72,6 @@ namespace nbody {
     }
   }
 
-<<<<<<< HEAD
   //Give the n bodies random positions
   void System::initRandomState() {
     float max_random = 1000.0f;
@@ -88,6 +87,4 @@ namespace nbody {
        _body[i].position() = randPos;
     }
   }
-=======
->>>>>>> origin/master
 } // namespace nbody

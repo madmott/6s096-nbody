@@ -84,5 +84,4 @@ namespace nbody {
        _body[i].position() = randPos;
     }
   }
-
 } // namespace nbody

@@ -16,7 +16,7 @@ namespace nbody {
     View *View:: _instance = nullptr;
     
     // exit the program if press the escape button
-    void View::exit() {
+    void View::exitGUI() {
         glutDestroyWindow( 1 );
         exit ( EXIT_SUCCESS );
     }
@@ -77,7 +77,7 @@ namespace nbody {
     void View::exitCallback( unsigned char key, int x, int y ) {
         if ( key == 27 ) {
             x += y; // have to do something with them, or else get an error
-            _instance -> exit();
+            _instance -> exitGUI();
         }
     }
     void View::displayCallback() {
@@ -97,9 +97,9 @@ namespace nbody {
         // create a dropdown menu [which you get by right-clicking], so if you then
         //click on the entry "create new object here", it generates a new object
         
-        int menu = glutCreateMenu( menuCallback );
+        glutCreateMenu( menuCallback );
         glutMouseFunc( mouseCallback );
-        glutSetMenu( menu );
+        glutSetMenu( 1 );
         glutAddMenuEntry( "create new body here", 1 );
         glutAttachMenu( GLUT_RIGHT_BUTTON );
         
@@ -108,7 +108,7 @@ namespace nbody {
         glutKeyboardFunc( exitCallback );
         
         // add a display callback, constantly updates the positions of the bodies
-        glutDisplayFunc( updateGUI );
+        glutDisplayFunc( displayCallback );
         
         // run the gui loop
         glutMainLoop();

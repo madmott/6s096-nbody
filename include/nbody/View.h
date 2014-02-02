@@ -24,9 +24,9 @@ namespace nbody{
         ~View() {}
         void initializer ();
         void updateGUI();
-        void menu( int value );
-        void mouse( int button, int state, int x, int y );
-        void exit( unsigned char key, int x, int y );
+        void menu();
+        void mouse( int x, int y );
+        void exitGUI();
             
     };
 }

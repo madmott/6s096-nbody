@@ -12,16 +12,22 @@ namespace nbody{
         float _xposition;
         float _yposition;
         System _system;
+        static void menuCallback ( int value );
+        static void mouseCallback( int button, int state, int x, int y);
+        static void exitCallback( unsigned char key, int x, int y );
+        static void displayCallback();
+        void drawBody( Vector3<float> position, Color color);
+    protected:
+        static View *_instance;
     public:
         View( System &system ) : _xposition{}, _yposition{}, _system{ system } {initializer();}
         ~View() {}
-        void initializer (); 
-        void menuCallback ( int value );
-        void mouseCallback( int button, int state, int x, int y);
-        void exitCallback( unsigned char key, int x, int y );
+        void initializer ();
         void updateGUI();
-        void drawBody( Vector3<float> position, Color color);
-    
+        void menu( int value );
+        void mouse( int button, int state, int x, int y );
+        void exit( unsigned char key, int x, int y );
+            
     };
 }
 

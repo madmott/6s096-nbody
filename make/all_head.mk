@@ -20,7 +20,7 @@ SHELL := /bin/sh
 CC := gcc
 # If you're a Mac user and only have clang,
 # you'll want to change CXX and LD to clang++.
-CXX := g++ -framework OpenGL
+CXX := g++
 LD := g++
 CP := cp -r
 RSYNC := rsync -iCau --exclude='\.*' --delete

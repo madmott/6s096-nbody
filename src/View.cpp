@@ -1,4 +1,4 @@
-#include <View.h>
+#include <nbody/View.h>
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
@@ -6,16 +6,18 @@
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 #include <vector>
-#include <System.h>
-#include <Body.h>
-#include <Color.h>
+#include <nbody/System.h>
+#include <nbody/Body.h>
+#include <nbody/Color.h>
+#include <nbody/constants.h>
 
 namespace nbody {
-    
     
     // exit the program if press the escape button
     void View::exitCallback (unsigned char key, int x, int y) {
         if (key == 27) {
+            x++; // I need to use these
+            y++; // or else I get errors
             glutDestroyWindow(1);
             exit (EXIT_SUCCESS);
         }
@@ -26,7 +28,7 @@ namespace nbody {
     void View:: menuCallback(int value){
         // do something here
         if (value == 1) {
-            mysystem -> addBody(_xposition, _yposition);
+            _system.addBody(_xposition, _yposition); // X and Y
         }
     }
     
@@ -45,9 +47,9 @@ namespace nbody {
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // just draw new
         
-        
-        std::<vector> Body bodies = System.getBodies();
-        for (int i = 0; i < bodies.size(); i++) {
+        _system.update(TIME_STEP); // update by one time step
+        std::vector <Body> bodies = _system.getBodies();
+        for (size_t i = 0; i < bodies.size(); i++) {
             drawBody(bodies[i].position(), bodies[i].color());
         }
         
@@ -70,8 +72,8 @@ namespace nbody {
     }
 
     
-    void View:: initializer () {
-        glutInit(&argc,argv);
+    void View::initializer () {
+        glutInit(nullptr, nullptr); // main function
         glutInitDisplayMode (GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
         
         // generate a new window called "N-body Simulation" with a size of 500X500
@@ -81,7 +83,8 @@ namespace nbody {
         
         // create a dropdown menu [which you get by right-clicking], so if you then
         //click on the entry "create new object here", it generates a new object
-        int menu = glutCreateMenu(menuFunction);
+        
+        int menu = glutCreateMenu(menuCallback);
         glutMouseFunc(mouseCallback);
         glutSetMenu(menu);
         glutAddMenuEntry("create new body here",1);
@@ -89,7 +92,7 @@ namespace nbody {
         
         // callback method for pressing on keys -> keyFunction only responds to
         // pressing down on the escape button
-        glutKeyboardFunc(keyFunction);
+        glutKeyboardFunc(exitCallback);
         
         // add a display callback, constantly updates the positions of the bodies
         glutDisplayFunc(updateGUI);

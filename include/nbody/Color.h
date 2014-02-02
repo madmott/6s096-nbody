@@ -2,6 +2,8 @@
 #define _NBODY_COLOR_H
 
 
+#include <cstdlib>
+
 namespace nbody{
     
 	//Color class will RGBA values in floats ranging from 0.0 to 1.0

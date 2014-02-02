@@ -14,7 +14,7 @@ namespace nbody {
     
     
     // exit the program if press the escape button
-    void exitCallback (unsigned char key, int x, int y) {
+    void View::exitCallback (unsigned char key, int x, int y) {
         if (key == 27) {
             glutDestroyWindow(1);
             exit (EXIT_SUCCESS);
@@ -23,7 +23,7 @@ namespace nbody {
     
     // if press the new object dropdown from the menu button, add a new body given the current mouse coordinates [the new object's position] to the system
     
-    void menuCallback(int value){
+    void View:: menuCallback(int value){
         // do something here
         if (value == 1) {
             mysystem -> addBody(_xposition, _yposition);
@@ -31,7 +31,7 @@ namespace nbody {
     }
     
     // draw a body at its correct position in the correct color
-    void drawBody (Vector3<float> position, Color color) {
+    void View::drawBody (Vector3<float> position, Color color) {
         glPointSize(1.0); // all bodies will be the same size
         glColor3f(color.r(), color.g(), color.b()); // set the color
         
@@ -41,7 +41,7 @@ namespace nbody {
     }
     
     // the display callback; for each body in the System's bodies, draw the body (after one time step)
-    void updateGUI(){
+    void View::updateGUI(){
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // just draw new
         
@@ -60,7 +60,7 @@ namespace nbody {
     
     // gets the position of the mouse for when a user presses right click
     // (which generates the menu for generating a new body)
-    void mouseCallback (int button, int state, int x, int y) {
+    void View::mouseCallback (int button, int state, int x, int y) {
         if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
             // want to know this x and y position
             _xposition = (x-250.0)/250.0;
@@ -70,7 +70,7 @@ namespace nbody {
     }
 
     
-    void initializer () {
+    void View:: initializer () {
         glutInit(&argc,argv);
         glutInitDisplayMode (GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
         

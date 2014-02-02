@@ -8,6 +8,7 @@
 #include <vector>
 #include <System.h>
 #include <Body.h>
+#include <Color.h>
 
 namespace nbody {
     
@@ -31,8 +32,8 @@ namespace nbody {
     
     // draw a body at its correct position in the correct color
     void drawBody (Vector3<float> position, Color color) {
-        glPointSize(1.0);
-        glColor3f(color.r(), color.g(), color.b());
+        glPointSize(1.0); // all bodies will be the same size
+        glColor3f(color.r(), color.g(), color.b()); // set the color
         
         glBegin(GL_POINTS); // draw the new point
         glVertex3f(position.x(), position.y(), position.z());

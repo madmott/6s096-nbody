@@ -15,11 +15,12 @@ namespace nbody {
     std::vector<Body> _body;
     float _softFactor = 1e-9f;
     float _dampingFactor = 1.0f;
-    float _defaultMass = 1.989e+30f;
-    System() = delete;
-    System( const System &sys ) = delete;
-    System& operator=( const System &sys ) = delete;
+    float _defaultMass = 1.0f;
+    
   public:
+    System() = delete;
+   // System( const System &sys );
+    System& operator=( const System &sys ) = delete;
     System( size_t N ) : _nBodies{N}, _body{} { initRandomState(); }
     System( std::istream &input ) : _nBodies{}, _body{} { readState( input ); }
     System( std::string filename ) : _nBodies{}, _body{} { readState( filename ); }

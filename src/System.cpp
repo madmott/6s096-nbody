@@ -83,10 +83,13 @@ namespace nbody {
       float randY = rand() * max_random;
       float randZ = rand() * max_random;
       float randMass = rand() * max_random;
-
+        
       Vector3f randPos = Vector3f{ randX, randY, randZ };
-      
-       _body[i].position() = randPos;
+      Body body = Body{ randMass };
+      body.position() = randPos;
+      body.force() = Vector3f();
+      body.velocity() = Vector3f();
+      _body.push_back(body);
     }
   }
 } // namespace nbody

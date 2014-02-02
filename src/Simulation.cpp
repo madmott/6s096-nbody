@@ -29,6 +29,8 @@ namespace nbody {
       throw std::runtime_error( "Tried to attach new system to running simulation!" );
     } else {
       _system = new System{input};
+      _view = new View (*_system); // this will start running now
+        
     }
   }
 
